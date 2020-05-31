@@ -1,0 +1,14 @@
+
+version: "3"
+services:
+  pg:
+    image: "postgres:alpine"
+    container_name: "postgres-1"
+    environment: 
+        POSTGRES_PASSWORD: password
+        POSTGRES_USER: postgres
+        POSTGRES_DB: clinicrec
+    ports:
+       - "5432:5432"
+    volumes:
+        - ./pg/db_data:/var/lib/postgresql/data

@@ -16,8 +16,6 @@ dbInstance.connect()
 .catch(e => console.log(e))
 .finally(() => dbInstance.end())
 
-
-
 require('dotenv').config();
 
 const expressLogger = expressPino({ logger });

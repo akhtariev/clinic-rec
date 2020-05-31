@@ -1,33 +1,25 @@
 {
-    "root": true,
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
+  "env": {
+      "browser": true,
+      "commonjs": true,
+      "node": true
+  },
+  "extends": [
       "airbnb-base"
-    ],
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "node": true
-    },
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018
-    },
-    "rules": {
-        "jsx-quotes": ["error", "prefer-single"],
-        "arrow-parens": ["error", "as-needed"],
-        "object-curly-newline": "off",
-        "implicit-arrow-linebreak": "off",
-        "function-paren-newline": "off",
-        "linebreak-style": 0
-    }
+  ],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaVersion": 2018
+  },
+  "rules": {
+      "jsx-quotes": ["error", "prefer-single"],
+      "arrow-parens": ["error", "as-needed"],
+      "object-curly-newline": "off",
+      "implicit-arrow-linebreak": "off",
+      "function-paren-newline": "off",
+      "linebreak-style": 0
   }
+}

@@ -4,18 +4,6 @@ const expressPino = require('express-pino-logger');
 const path = require('path');
 const logger = require('./utils/logger');
 const { ENVIRONMENT } = require('./utils/constants');
-const DB  = require('pg').Client
-const dbInstance = new DB({
-  user: "postgres",
-  password: "password",
-  port: 5432, 
-  database: "postgres"
-})
-dbInstance.connect()
-.then(() => console.log("Connected to DB"))
-.catch(e => console.log(e))
-.finally(() => dbInstance.end())
-
 require('dotenv').config();
 
 const expressLogger = expressPino({ logger });
@@ -38,6 +26,5 @@ if (ENVIRONMENT === 'production' || ENVIRONMENT === 'dev') {
       res.sendFile(path.join(`${__dirname}/../../`, 'client', 'build', 'index.html'));
   });
 }
-
 
 module.exports = app;

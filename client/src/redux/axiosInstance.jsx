@@ -1,8 +1,8 @@
 import axios from 'axios';
-import serverConnectionInfo from '../constants/config';
+import {URN_SERVER} from '../constants/config';
 
 const axiosInstance = axios.create({
-  baseURL: serverConnectionInfo.URN_CLIENT,
+  baseURL: URN_SERVER,
 });
 
 export default axiosInstance;

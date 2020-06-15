@@ -1,3 +1,4 @@
-const URN_CLIENT = process.env.NODE_ENV === 'production' ? 'TODO' : 'http://localhost:5000';
+const URN_CLIENT = process.env.NODE_ENV === 'production' ? 'TODO' : 'http://localhost:3000';
+const URN_SERVER = process.env.NODE_ENV === 'production' ? 'TODO' : 'http://localhost:5002';
 
-export default URN_CLIENT;
+module.exports = { URN_CLIENT, URN_SERVER };

@@ -2,7 +2,7 @@ const app = require('./src/app');
 const logger = require('./src/utils/logger');
 const sqlClient = require('./src/utils/sqlClient');
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002;
 
 app.listen(port, async () => {
   try {

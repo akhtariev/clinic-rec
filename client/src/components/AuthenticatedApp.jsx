@@ -8,6 +8,7 @@ import TextResponse from './common/TextResponse';
 import LoadingMessage from './common/LoadingMesage';
 import {URN_CLIENT} from '../constants/config';
 import ClinicViewer from './ClinicViewer';
+import DoctorViewer from './DoctorViewer';
 import AuthenticatedWelcomePage from './AuthenticatedWelcomePage';
 
 
@@ -61,6 +62,14 @@ const AuthenticatedApp = () => {
                  component = { 
                    () => (
                      <ClinicViewer/>
+                   )
+                 }/>
+              <Route
+                 path='/doctors'
+                 exact 
+                 component = { 
+                   () => (
+                     <DoctorViewer/>
                    )
                  }/>
             </Switch>

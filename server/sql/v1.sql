@@ -8,7 +8,8 @@
 -- Patient.email change length of CHAR to VARCHAR 100
 -- Rachit - 2020-06-16 
 -- 1) Changed clinic postal_code to NOT NULL since we cant have a clinic with a null postal code. 
--- 2) Cleaned up data in doctor, clinic, Specializes..
+-- 2) Cleaned up data in doctor, clinic, Specializes, rating. Added bios to doctor
+-- 3) Changed doctor bio to varchar(255) for longer bios. 
 
 DROP TABLE IF EXISTS Specialty CASCADE;
 DROP TABLE IF EXISTS Medical_History CASCADE;
@@ -104,7 +105,7 @@ CREATE TABLE Doctor(
     password VARCHAR(36),
     full_name VARCHAR(36),
     profile_picture_url VARCHAR(40),
-    bio VARCHAR(50),
+    bio VARCHAR(255),
     clinic_id CHAR(36) NOT NULL,
     FOREIGN KEY(clinic_id) REFERENCES CLINIC ON DELETE SET DEFAULT
 );

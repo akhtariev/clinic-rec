@@ -6,6 +6,9 @@
 -- As well as every table that refers to those
 -- Rachit - 2020-06-16 
 -- Patient.email change length of CHAR to VARCHAR 100
+-- Rachit - 2020-06-16 
+-- 1) Changed clinic postal_code to NOT NULL since we cant have a clinic with a null postal code. 
+-- 2) Cleaned up data in doctor, clinic, Specializes..
 
 DROP TABLE IF EXISTS Specialty CASCADE;
 DROP TABLE IF EXISTS Medical_History CASCADE;
@@ -85,15 +88,15 @@ name VARCHAR(30),
 opening_time VARCHAR(10) ,
 closing_time VARCHAR(10),
 days_open VARCHAR(14),
-postal_code CHAR(7),
+postal_code CHAR(7) NOT NULL,
 FOREIGN KEY(postal_code) REFERENCES ClinicLocation(postal_code)
 );
 
-INSERT INTO Clinic VALUES('0001', 'ClinicA', '9:00', '18:00', 'Mon-Fri','V6T 1Z4'); 
-INSERT INTO Clinic VALUES('0002', 'ClinicB', '8:00', '17:00', 'Mon-Fri','V6T AB3');
-INSERT INTO Clinic VALUES('0003', 'ClinicC', '8:00', '17:00', 'Mon-Fri','V6T AB4');
-INSERT INTO Clinic VALUES('0004', 'ClinicD', '8:00', '16:00', 'Mon-Fri','V6T AB5');
-INSERT INTO Clinic VALUES('0005', 'ClinicE', '8:00', '15:00', 'Mon-Fri','V6T WA4');
+INSERT INTO Clinic VALUES('0001', 'Vancouver general clinic', '9:00', '18:00', 'Mon-Fri','V6T 1Z4'); 
+INSERT INTO Clinic VALUES('0002', 'Richmond central clinic', '8:00', '17:00', 'Mon-Fri','V6T AB3');
+INSERT INTO Clinic VALUES('0003', 'Burnaby childcare clinic', '8:00', '17:00', 'Mon-Fri','V6T AB4');
+INSERT INTO Clinic VALUES('0004', 'Childcare central', '8:00', '16:00', 'Mon-Fri','V6T AB5');
+INSERT INTO Clinic VALUES('0005', 'Care Clinic', '8:00', '15:00', 'Mon-Fri','V6T WA4');
 
 CREATE TABLE Doctor(
     id CHAR(24) PRIMARY KEY,
@@ -107,11 +110,14 @@ CREATE TABLE Doctor(
 );
 
 INSERT INTO Doctor VALUES 
-('1000', 'max.brown@gmail.com', 'maxbrown1000', 'Max Brown', 'https://google.com/images/maxbrown', '', '0001'),
-('1001', 'alex.smith@gmail.com', 'alexsmith1001','Alex Smith', 'https://google.com/images/alexsmith', '', '0002'),
-('1002', 'mary.davis@gmail.com', 'marydavis1002','Mary Davis', 'https://google.com/images/marydavis', '', '0003'),
-('1003', 'eliza.jones@gmail.com', 'elizajones1003','Eliza Jones', 'https://google.com/images/elizajones', '', '0004'),
-('1004', 'jane.miller@gmail.com', 'janemiller1004','Jane Miller', 'https://google.com/images/janemiller', '', '0005');
+('1000', 'max.brown@gmail.com', 'maxbrown1000', 'Max Brown', 'https://google.com/images/maxbrown', 'Been a doctor for 10 years. I love dogs and playing soccer for fun!', '0001'),
+('1001', 'alex.smith@gmail.com', 'alexsmith1001','Alex Smith', 'https://google.com/images/alexsmith', 'Learning medicine was hard but being a doctor to help people is so rewarding.', '0001'),
+('1002', 'mary.davis@gmail.com', 'marydavis1002','Mary Davis', 'https://google.com/images/marydavis', 'Mary has treated 1000s of patients in her life as a doctor.', '0001'),
+('1003', 'eliza.jones@gmail.com', 'elizajones1003','Eliza Jones', 'https://google.com/images/elizajones', 'Dr Jones is one of the most respected Doctors in Vancouver.', '0001'),
+('1004', 'jonas.brown@gmail.com', 'jonasbrown2020','Jonas Brown', 'https://google.com/images/jonasbrown', 'My name is Jonas and I love cats and playing with my kids during my free time.', '0001'),
+('1005', 'rohan.m@gmail.com', 'rohanm21', 'Rohan M', 'https://google.com/images/rohanm', 'Been a doctor for 10 years. I love dogs and playing soccer for fun!', '0002'),
+('1006', 'rachit.malik@gmail.com', 'rachitm21','Rachit Malik', 'https://google.com/images/rachitmalik', 'One of my goals in life is to help people through medicine. I hope I can be of service to you..', '0003');
+
 
 CREATE TABLE Rating(
     id CHAR(36) PRIMARY KEY,
@@ -125,7 +131,7 @@ INSERT INTO Rating VALUES
 ('1000', 'Great', 5, '1000'),
 ('1001', 'Very good', 5, '1001'),
 ('1002', 'Good', 4, '1001'),
-('1003', '', 1, '1001'),
+('1003', 'Bad', 1, '1001'),
 ('1004', 'Good', 4, '1003');
 
 CREATE TABLE Specializes(
@@ -142,6 +148,8 @@ INSERT INTO Specializes VALUES ('Neurology', '1001', 18);
 INSERT INTO Specializes VALUES ('Pediatrics', '1002', 19);
 INSERT INTO Specializes VALUES ('Dermatology', '1003', 18);
 INSERT INTO Specializes VALUES ('Gynecology', '1004', 17);
+INSERT INTO Specializes VALUES ('Gynecology', '1005', 20);
+INSERT INTO Specializes VALUES ('Neurology', '1006', 10);
 
 CREATE TABLE Bill ( 
 bill_id CHAR(36) PRIMARY KEY, 

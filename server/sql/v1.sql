@@ -4,6 +4,8 @@
 -- Patient - change type of id to SERIAL from CHAR
 -- Doctor - change type of id to SERIAL from CHAR
 -- As well as every table that refers to those
+-- Rachit - 2020-06-16 
+-- Patient.email change length of CHAR to VARCHAR 100
 
 DROP TABLE IF EXISTS Specialty CASCADE;
 DROP TABLE IF EXISTS Medical_History CASCADE;
@@ -53,7 +55,7 @@ VALUES
 CREATE TABLE Patient(
     id CHAR(24) UNIQUE, -- because of  ERROR:  there is no unique constraint matching given keys for referenced table "patient"
     mid SERIAL NOT NULL , 
-    email VARCHAR(20),
+    email VARCHAR(100),
     password VARCHAR(20),
     full_name VARCHAR(20),
     profile_picture_url VARCHAR(40),

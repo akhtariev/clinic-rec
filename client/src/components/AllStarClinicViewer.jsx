@@ -15,7 +15,6 @@ const ClinicViewer = () => {
         return <TextResponse heading='No all star clinics found.' body='Please contact administrator' />;
       }
       getAllStarClinics(dispatch, cityName);
-      setCityName('');
     }
     return <LoadingMessage heading='Please wait' body='Loading all star clinics...' />;
   };

@@ -3,7 +3,7 @@ import { INVALIDATE_USERS, REQUEST_USERS, RECEIVE_USERS } from '../actions/userA
 const initialState = {
   isFetchingUsers: false,
   didInvalidateUsers: false,
-  responseData: null 
+  responseData: null,
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
@@ -17,11 +17,11 @@ const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetchingUsers: false,
         didInvalidateUsers: false,
-        responseData: payload
+        responseData: payload,
       };
     default:
       return state;
   }
 };
 
-export default userReducer; 
+export default userReducer;

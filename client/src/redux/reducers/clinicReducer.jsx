@@ -1,4 +1,4 @@
-import { INVALIDATE_CLINICS, REQUEST_CLINICS, RECEIVE_CLINICS, INVALIDATE_ALLSTARS, REQUEST_ALLSTARS, RECEIVE_ALLSTARS } from '../actions/clinicActions';
+import { INVALIDATE_CLINICS, REQUEST_CLINICS, RECEIVE_CLINICS, INVALIDATE_ALLSTARS, REQUEST_ALLSTARS, RECEIVE_ALLSTARS, RECEIVE_PROJ_CLINICS, UPDATED_SELECTED_COLS } from '../actions/clinicActions';
 
 const initialState = {
   isFetchingClinics: false,
@@ -7,6 +7,7 @@ const initialState = {
   allStarResponseData: null,
   isFetchingAllStars: false,
   didInvalidateAllStars: false,
+  selectedCols: [],
 };
 
 const clinicReducer = (state = initialState, { type, payload }) => {
@@ -21,6 +22,18 @@ const clinicReducer = (state = initialState, { type, payload }) => {
         isFetchingClinics: false,
         didInvalidateClinics: false,
         responseData: payload,
+      };
+    case RECEIVE_PROJ_CLINICS:
+      return {
+        ...state,
+        isFetchingClinics: false,
+        didInvalidateClinics: false,
+        responseData: payload,
+      };
+    case UPDATED_SELECTED_COLS:
+      return {
+        ...state,
+        selectedCols: payload,
       };
     case INVALIDATE_ALLSTARS:
       return { ...state, didInvalidateAllStars: true };

@@ -28,7 +28,7 @@ const AuthenticatedApp = () => {
       createPatient(
         dispatch,
         user.sub.substring(auth0Prefix.length),
-        user.nickname,
+        user.email,
         getTokenSilently,
       );
     } else {

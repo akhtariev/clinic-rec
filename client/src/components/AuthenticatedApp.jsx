@@ -12,11 +12,12 @@ import DoctorViewer from './DoctorViewer';
 import UserViewer from './UserViewer';
 import AllStarClinicViewer from './AllStarClinicViewer';
 import AuthenticatedWelcomePage from './AuthenticatedWelcomePage';
+import Profile from './Profile';
 
 const AuthenticatedApp = () => {
   const dispatch = useDispatch();
   const { getTokenSilently, user } = useAuth0();
-  const patientState = useSelector(state => state.patients);
+  const patientState = useSelector(state => state.patient);
 
   if (patientState.id === null && !patientState.isFetching) {
     if (!user) {
@@ -30,7 +31,7 @@ const AuthenticatedApp = () => {
       createPatient(
         dispatch,
         user.sub.substring(auth0Prefix.length),
-        user.nickname,
+        user.email,
         getTokenSilently,
       );
     } else {
@@ -49,6 +50,11 @@ const AuthenticatedApp = () => {
   if (patientState.isFetching) {
     return <LoadingMessage heading='Please wait' body='Loading patient...' />;
   }
+
+  if (patientState.triggerUpdate) {
+    return <Profile />;
+  }
+
   return (
     <>
       <Grid container>
@@ -100,6 +106,15 @@ const AuthenticatedApp = () => {
                 component={
                    () => (
                      <AllStarClinicViewer />
+                   )
+                 }
+              />
+              <Route
+                path='/profile'
+                exact
+                component={
+                   () => (
+                     <Profile />
                    )
                  }
               />

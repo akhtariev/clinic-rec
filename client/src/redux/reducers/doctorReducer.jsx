@@ -3,7 +3,7 @@ import { INVALIDATE_DOCTORS, REQUEST_DOCTORS, RECEIVE_DOCTORS } from '../actions
 const initialState = {
   isFetchingDoctors: false,
   didInvalidateDoctors: false,
-  responseData: null 
+  responseData: null,
 };
 
 const doctorReducer = (state = initialState, { type, payload }) => {
@@ -17,7 +17,7 @@ const doctorReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetchingDoctors: false,
         didInvalidateDoctors: false,
-        responseData: payload
+        responseData: payload,
       };
     default:
       return state;

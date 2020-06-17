@@ -9,6 +9,7 @@ import LoadingMessage from './common/LoadingMesage';
 import { URN_CLIENT } from '../constants/config';
 import ClinicViewer from './ClinicViewer';
 import DoctorViewer from './DoctorViewer';
+import AllStarClinicViewer from './AllStarClinicViewer';
 import AuthenticatedWelcomePage from './AuthenticatedWelcomePage';
 
 const AuthenticatedApp = () => {
@@ -80,6 +81,15 @@ const AuthenticatedApp = () => {
                 component={
                    () => (
                      <DoctorViewer />
+                   )
+                 }
+              />
+              <Route
+                path='/specialclinics'
+                exact
+                component={
+                   () => (
+                     <AllStarClinicViewer />
                    )
                  }
               />

@@ -12,11 +12,12 @@ import TextResponse from './common/TextResponse';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 280,
+    height: 280,
     margin: '40px',
   },
   media: {
-    height: 140,
+    height: 180,
   },
 });
 
@@ -28,15 +29,7 @@ const AuthenticatedWelcomePage = () => {
       <Grid item xs={12}>
         <TextResponse heading='Welcome to clinic recommender' body='Here are a few things you can do: ' />
       </Grid>
-      {/* <Grid item xs={6}>
-        <Button variant='contained' color='primary' onClick={
-          ()=> history.push('/clinics')}> Find clinics near you </Button>
-      </Grid> */}
-      {/* <Grid item xs={6}>
-        <Button variant='contained' color='primary' onClick={
-          ()=> history.push('/doctors')}> Find doctor ratings </Button>
-      </Grid> */}
-      <Grid>
+      <Grid item xs={3}>
         <Card className={classes.root}>
           <CardActionArea onClick={() => history.push('/clinics')}>
             <CardMedia
@@ -44,14 +37,14 @@ const AuthenticatedWelcomePage = () => {
               image='https://blogs.ubc.ca/theedventure/files/2015/12/de1_0506.jpg'
             />
             <CardContent>
-              <Typography gutterBottom variant='h6' component='h2'>
+              <Typography gutterBottom align='center' variant='h6' component='h2'>
                 FIND CLINICS NEAR YOU
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
-      <Grid>
+      <Grid item xs={3}>
         <Card className={classes.root}>
           <CardActionArea onClick={() => history.push('/doctors')}>
             <CardMedia
@@ -59,14 +52,29 @@ const AuthenticatedWelcomePage = () => {
               image='https://www.hr.ubc.ca/benefits-fyi/files/2013/03/find-a-doctor-483x328.jpg'
             />
             <CardContent>
-              <Typography gutterBottom variant='h6' component='h2'>
+              <Typography gutterBottom align='center' variant='h6' component='h2'>
                 FIND DOCTOR RATINGS
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
-    </Grid>
+      <Grid item xs={3}>
+      <Card className={classes.root}>
+          <CardActionArea onClick={() => history.push('/specialclinics')}>
+            <CardMedia
+              className={classes.media}
+              image='https://image.freepik.com/free-vector/start_53876-25533.jpg'
+            />
+            <CardContent>
+              <Typography gutterBottom align='center' variant='h6' component='h2'>
+               🌟FIND ALL STAR CLINICS 🌟
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Grid>
+      </Grid>
   );
 };
 

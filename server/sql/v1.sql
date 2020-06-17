@@ -1,15 +1,22 @@
 -- Change Log:
+
 -- Roman - 2020-06-13
 -- Medical_History - change type of id to SERIAL from CHAR
 -- Patient - change type of id to SERIAL from CHAR
 -- Doctor - change type of id to SERIAL from CHAR
 -- As well as every table that refers to those
+
 -- Rachit - 2020-06-16 
 -- Patient.email change length of CHAR to VARCHAR 100
+
 -- Rachit - 2020-06-16 
 -- 1) Changed clinic postal_code to NOT NULL since we cant have a clinic with a null postal code. 
 -- 2) Cleaned up data in doctor, clinic, Specializes, rating. Added bios to doctor
--- 3) Changed doctor bio to varchar(255) for longer bios. 
+-- 3) Changed doctor bio to varchar(255) for longer bios.
+
+-- Roman - 2020-06-16
+-- Patient - remove password - Auth0 handles it
+-- As well as every table that refers to those
 
 DROP TABLE IF EXISTS Specialty CASCADE;
 DROP TABLE IF EXISTS Medical_History CASCADE;
@@ -60,7 +67,6 @@ CREATE TABLE Patient(
     id CHAR(24) UNIQUE, -- because of  ERROR:  there is no unique constraint matching given keys for referenced table "patient"
     mid SERIAL NOT NULL , 
     email VARCHAR(100),
-    password VARCHAR(20),
     full_name VARCHAR(20),
     profile_picture_url VARCHAR(40),
     PRIMARY KEY(id, mid), 

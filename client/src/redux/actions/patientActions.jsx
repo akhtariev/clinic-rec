@@ -66,12 +66,13 @@ export const updatePatient = async (
   patientId,
   fullName,
   medHistory,
+  profilePicUrl,
   getTokenCb) => {
   const token = await getTokenCb();
 
   dispatch(requestPatient(dispatch));
 
-  axios.put(`/api/users/patient/${patientId}`, { fullName, medHistory }, { headers: { Authorization: `Bearer ${token}` } })
+  axios.put(`/api/users/patient/${patientId}`, { fullName, medHistory, profilePicUrl }, { headers: { Authorization: `Bearer ${token}` } })
     .then(
       response => {
         dispatch(receivePatient(response));

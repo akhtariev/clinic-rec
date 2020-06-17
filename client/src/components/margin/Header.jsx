@@ -1,10 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography, AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
+import createHistory from 'history/createBrowserHistory';
 import { useAuth0 } from '../../authentication/react-auth0-spa';
 import colors from '../../constants/colors';
+
+const history = createHistory({ forceRefresh: true });
 
 const useStyles = makeStyles(theme => ({
   bar: {
@@ -78,11 +82,6 @@ const Header = () => {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <Link className={classes.link} to='/'>
-        <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
-          Dashboard
-        </MenuItem>
-      </Link>
       <Link className={classes.link} to='/profile'>
         <MenuItem className={classes.menuItem} onClick={handleMenuClose}>
           Profile
@@ -99,7 +98,7 @@ const Header = () => {
       <AppBar position='static' className={classes.bar}>
         <Toolbar>
           <Typography variant='h4' className={classes.title}>
-            <Link to='/' className={classes.titleLink}>
+            <Link className={classes.titleLink} onClick={() => history.pushState('/')}>
               Clinic Recommender
             </Link>
           </Typography>

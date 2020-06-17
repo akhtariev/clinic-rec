@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Paper, Box, List, ListItem, Typography, Button } from '@material-ui/core';
+import createHistory from 'history/createBrowserHistory';
 import { useAuth0 } from '../authentication/react-auth0-spa';
 import colors from '../constants/colors';
 import { updatePatient } from '../redux/actions/patientActions';
+
+const history = createHistory({ forceRefresh: true });
 
 const useStyles = makeStyles({
   main: {
@@ -49,6 +52,7 @@ export default function Profile() {
     guardianName: '',
     height: '',
     weight: '',
+    profilePicUrl: '',
   });
 
   const savePatientInfo = () => {
@@ -57,8 +61,12 @@ export default function Profile() {
       patientState.id,
       info.fullName,
       { guardianName: info.guardianName, height: info.height, weight: info.weight },
+      info.profilePicUrl, 
       getTokenSilently,
     );
+    if (patientState.medHistory.id) {
+      history.push('/');
+    }
   };
 
   return (
@@ -90,6 +98,11 @@ export default function Profile() {
             {patientState.fullName && (
             <ListItem key={1} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Full Name: ${patientState.fullName}`}</Typography>
+            </ListItem>
+            )}
+             {patientState.fullName && (
+            <ListItem key={1} role={undefined} dense>
+              <Typography className={classes.heading} variant='h6'>{`Profile Picture URL: ${patientState.profile_picture_url}`}</Typography>
             </ListItem>
             )}
             {patientState.medHistory.guardian_name && (
@@ -131,6 +144,9 @@ export default function Profile() {
           <List>
             <ListItem key={2} role={undefined} dense>
               <TextField className={classes.textField} id='standard-basic' label='Full Name' onChange={event => setInfo({ ...info, fullName: event.target.value })} />
+            </ListItem>
+            <ListItem key={3} role={undefined} dense>
+              <TextField className={classes.textField} id='standard-basic' label='Profile Picture URL' onChange={event => setInfo({ ...info, profilePicUrl: event.target.value })} />
             </ListItem>
             <ListItem key={1} role={undefined} dense>
               <TextField className={classes.textField} id='standard-basic' label='Guardian Name' onChange={event => setInfo({ ...info, guardianName: event.target.value })} />

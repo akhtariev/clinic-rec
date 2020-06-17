@@ -25,6 +25,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         didInvalidate: false,
         id: payload.patientData.id,
         email: payload.patientData.email,
+        fullName: payload.patientData.full_name,
         profile_picture_url: payload.patientData.profile_picture_url,
         medHistory: payload.medHistData,
       };

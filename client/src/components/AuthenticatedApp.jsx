@@ -10,6 +10,7 @@ import { URN_CLIENT } from '../constants/config';
 import ClinicViewer from './ClinicViewer';
 import DoctorViewer from './DoctorViewer';
 import AuthenticatedWelcomePage from './AuthenticatedWelcomePage';
+import Profile from './Profile';
 
 const AuthenticatedApp = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const AuthenticatedApp = () => {
   }
 
   if (patientState.triggerUpdate) {
-    return <TextResponse heading='Trigerring update' body='work in progress...' />;
+    return <Profile />;
   }
 
   return (
@@ -85,6 +86,15 @@ const AuthenticatedApp = () => {
                 component={
                    () => (
                      <DoctorViewer />
+                   )
+                 }
+              />
+              <Route
+                path='/profile'
+                exact
+                component={
+                   () => (
+                     <Profile />
                    )
                  }
               />

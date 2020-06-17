@@ -1,4 +1,4 @@
-import { CREATE_PATIENT, INVALIDATE_PATIENT, REQUEST_PATIENT, RECEIVE_PATIENT } from '../actions/patientActions';
+import { UPDATE_PATIENT, INVALIDATE_PATIENT, REQUEST_PATIENT, RECEIVE_PATIENT, REQUEST_PATIENT_CREATE } from '../actions/patientActions';
 
 const initialState = {
   isFetching: false,
@@ -7,6 +7,7 @@ const initialState = {
   email: null,
   profile_picture_url: null,
   medHistory: null,
+  triggerUpdate: false,
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
@@ -15,6 +16,8 @@ const userReducer = (state = initialState, { type, payload }) => {
       return { ...state, didInvalidate: true };
     case REQUEST_PATIENT:
       return { ...state, isFetching: true, didInvalidate: false };
+    case REQUEST_PATIENT_CREATE:
+      return { ...state, isFetching: true, didInvalidate: false, triggerUpdate: true };
     case RECEIVE_PATIENT:
       return {
         ...state,
@@ -25,10 +28,10 @@ const userReducer = (state = initialState, { type, payload }) => {
         profile_picture_url: payload.patientData.profile_picture_url,
         medHistory: payload.medHistData,
       };
-    case CREATE_PATIENT:
+    case UPDATE_PATIENT:
       return {
-        id: payload._id,
-        email: payload.email,
+        ...state,
+        triggerUpdate: false,
       };
     default:
       return state;

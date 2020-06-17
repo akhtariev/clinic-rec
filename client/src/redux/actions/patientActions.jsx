@@ -1,14 +1,18 @@
 import axios from '../axiosInstance';
 
 export const GET_PATIENT = 'GET_PATIENT';
-export const CREATE_PATIENT = 'CREATE_PATIENT';
+export const UPDATE_PATIENT = 'UPDATE_PATIENT';
 export const REQUEST_PATIENT = 'REQUEST_PATIENT';
+export const REQUEST_PATIENT_CREATE = 'REQUEST_PATIENT_CREATE';
 export const RECEIVE_PATIENT = 'RECEIVE_PATIENT';
-export const RECEIVE_PATIENT_AFTER_PAYMENT = 'RECEIVE_PATIENT_AFTER_PAYMENT';
 export const INVALIDATE_PATIENT = 'INVALIDATE_PATIENT';
 
 export const requestPatient = () => ({
   type: REQUEST_PATIENT,
+});
+
+export const requestCreatePatient = () => ({
+  type: REQUEST_PATIENT_CREATE,
 });
 
 export const receivePatient = response => ({
@@ -20,9 +24,13 @@ export const invalidatePatient = () => ({
   type: INVALIDATE_PATIENT,
 });
 
+export const receiveUpdatedPatient = () => ({
+  type: UPDATE_PATIENT,
+});
+
 export const createPatient = async (dispatch, patientId, email, getTokenCb) => {
   const token = await getTokenCb();
-  dispatch(requestPatient(dispatch));
+  dispatch(requestCreatePatient(dispatch));
 
   axios.post(`/api/users/patient/${patientId}`, { username: email }, { headers: { Authorization: `Bearer ${token}` } })
     .then(

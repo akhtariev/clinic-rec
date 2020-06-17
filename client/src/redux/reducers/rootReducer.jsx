@@ -6,7 +6,7 @@ import doctorReducer from './doctorReducer';
 const rootReducer = combineReducers({
   patients: patientReducer,
   clinics: clinicReducer,
-  doctors: doctorReducer
+  doctors: doctorReducer,
 });
 
 export default rootReducer;

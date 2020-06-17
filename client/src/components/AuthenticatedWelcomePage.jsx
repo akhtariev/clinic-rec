@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import createHistory from 'history/createBrowserHistory';
 import { Grid } from '@material-ui/core';
@@ -60,7 +61,7 @@ const AuthenticatedWelcomePage = () => {
         </Card>
       </Grid>
       <Grid item xs={3}>
-      <Card className={classes.root}>
+        <Card className={classes.root}>
           <CardActionArea onClick={() => history.push('/specialclinics')}>
             <CardMedia
               className={classes.media}
@@ -68,13 +69,13 @@ const AuthenticatedWelcomePage = () => {
             />
             <CardContent>
               <Typography gutterBottom align='center' variant='h6' component='h2'>
-               🌟FIND ALL STAR CLINICS 🌟
+                🌟FIND ALL STAR CLINICS 🌟
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
       </Grid>
-      </Grid>
+    </Grid>
   );
 };
 

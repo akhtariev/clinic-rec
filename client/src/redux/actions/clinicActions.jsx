@@ -1,6 +1,5 @@
 import axios from '../axiosInstance';
 
-
 export const GET_CLINICS = 'GET_CLINICS';
 export const RECEIVE_CLINICS = 'RECEIVE_CLINICS';
 export const REQUEST_CLINICS = 'REQUEST_CLINICS';
@@ -15,7 +14,7 @@ export const requestClinics = () => ({
 
 export const requestAllStarClinics = () => ({
   type: REQUEST_ALLSTARS,
-})
+});
 
 export const receiveClinics = response => ({
   type: RECEIVE_CLINICS,
@@ -24,21 +23,18 @@ export const receiveClinics = response => ({
 
 export const receiveAllStarClinics = response => ({
   type: RECEIVE_ALLSTARS,
-  payload: response.data, 
-})
+  payload: response.data,
+});
 
-export const invalidateClinics= () => ({
-    type: INVALIDATE_CLINICS,
-})
+export const invalidateClinics = () => ({
+  type: INVALIDATE_CLINICS,
+});
 
-export const invalidateAllStarClinics= () => ({
+export const invalidateAllStarClinics = () => ({
   type: INVALIDATE_ALLSTARS,
-})
-
-
+});
 
 export const getClinics = async (dispatch, cityName) => {
-
   dispatch(requestClinics(dispatch));
 
   axios.get(`/api/clinic/getClinicDetailsInCity/${cityName}`)
@@ -53,9 +49,7 @@ export const getClinics = async (dispatch, cityName) => {
     );
 };
 
-
 export const getAllStarClinics = async (dispatch, cityName) => {
-
   dispatch(requestAllStarClinics(dispatch));
 
   axios.get(`/api/clinic/getClinicsWithAllSpecialities/${cityName}`)

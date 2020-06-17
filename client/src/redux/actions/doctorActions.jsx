@@ -6,7 +6,7 @@ export const REQUEST_DOCTORS = 'REQUEST_DOCTORS';
 export const INVALIDATE_DOCTORS = 'INVALIDATE_DOCTORS';
 
 export const requestDoctors = () => ({
-  type: REQUEST_DOCTORS
+  type: REQUEST_DOCTORS,
 });
 
 export const receiveDoctors = response => ({
@@ -14,9 +14,9 @@ export const receiveDoctors = response => ({
   payload: response.data,
 });
 
-export const invalidateDoctors= () => ({
-    type: INVALIDATE_DOCTORS
-})
+export const invalidateDoctors = () => ({
+  type: INVALIDATE_DOCTORS,
+});
 
 export const getDoctors = async (dispatch, specialty) => {
   dispatch(requestDoctors(dispatch));
@@ -26,8 +26,7 @@ export const getDoctors = async (dispatch, specialty) => {
       response => {
         dispatch(receiveDoctors(response));
       },
-      error => {
-        console.log(`Error fetching clinics for city:${specialty}`, error);
+      () => {
         dispatch(invalidateDoctors());
       },
     );

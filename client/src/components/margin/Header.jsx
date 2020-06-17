@@ -98,7 +98,7 @@ const Header = () => {
       <AppBar position='static' className={classes.bar}>
         <Toolbar>
           <Typography variant='h4' className={classes.title}>
-            <Link className={classes.titleLink} onClick={() => history.pushState('/')}>
+            <Link className={classes.titleLink} onClick={() => history.push('/')}>
               Clinic Recommender
             </Link>
           </Typography>

@@ -45,7 +45,7 @@ const ClinicViewer = () => {
       <Grid container spacing={3} alignContent='center'>
         <Grid item xs={12}>
           <TextField placeholder='City name' onChange={onChangeCityName} />
-          <Button color='primary' onClick={getClinicsOnClick}> Search </Button>
+          <Button color='primary' onClick={getClinicsOnClick}> Filtered Search </Button>
         </Grid>
         <Grid item xs={12}>
           <CheckBoxes cityName={cityName} />

@@ -14,7 +14,6 @@ const ClinicViewer = () => {
       if (!clinicsState) {
         return <TextResponse heading='No all star clinics found.' body='Please contact administrator' />;
       }
-      console.log(cityName);
       getAllStarClinics(dispatch, cityName);
       setCityName('');
     }

@@ -1,42 +1,22 @@
 const router = require('express').Router();
 const sqlClient = require('../../utils/sqlClient');
+const logger = require('../../utils/logger');
 
-router.get('/getDynamicClinicDetails/', (req, res) => {
-  const projColName = req.query.colName;
-  const { cityName } = req.query;
-  let query = '';
-  switch (projColName) {
-    case 'name':
-      query = 'select c.name from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    case 'opening_time':
-      query = 'select c.opening_time from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    case 'closing_time':
-      query = 'select c.closing_time from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    case 'days_open':
-      query = 'select c.days_open from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    case 'postal_code':
-      query = 'select c.postal_code from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    case 'city':
-      query = 'select c.city from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
-    default:
-      query = 'select * from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code;';
-      break;
+router.post('/getDynamicClinicDetails/:cityName', async (req, res) => {
+  const initColNames = req.body.colNames;
+  // const projColNames = initColNames.push('id');
+  const projColNamesF = initColNames.join();
+
+  const { cityName } = req.params;
+  const query = `select ${projColNamesF}, id from clinic c, cliniclocation cl where cl.city = $1 and c.postal_code = cl.postal_code`;
+  const result = await sqlClient.query(query, [cityName]);
+  try {
+    res.send(result.rows);
+    return;
+  } catch (err) {
+    logger.debug(`Error creating patient with id ${req.params.id}, error: ${err}`);
   }
-  sqlClient.query(query, [cityName],
-    (err, qres) => {
-      if (err) {
-        return res.status(500);
-      }
-
-      res.send(qres.rows);
-      return res.status(200);
-    });
+  res.status(400);
 });
 
 module.exports = router;

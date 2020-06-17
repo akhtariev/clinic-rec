@@ -4,7 +4,9 @@ const initialState = {
   isFetching: false,
   didInvalidate: false,
   id: null,
-  username: null,
+  email: null,
+  profile_picture_url: null,
+  medHistory: null,
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
@@ -18,15 +20,15 @@ const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetching: false,
         didInvalidate: false,
-        id: payload.id,
-        email: payload.email,
-        mid: payload.mid,
-        profile_picture_url: payload.profile_picture_url,
+        id: payload.patientData.id,
+        email: payload.patientData.email,
+        profile_picture_url: payload.patientData.profile_picture_url,
+        medHistory: payload.medHistData,
       };
     case CREATE_PATIENT:
       return {
         id: payload._id,
-        username: payload.username,
+        email: payload.email,
       };
     default:
       return state;

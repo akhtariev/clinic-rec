@@ -5,9 +5,10 @@ const { formatPatientResponse } = require('./userUtil');
 
 router.route('/patient/:id').put(async (req, res) => {
   const patientId = req.params.id;
+  const { medHistory } = req.body;
   try {
     const patientRes = await sqlClient.query(`UPDATE Patient SET full_name='${req.body.fullName}' WHERE id='${req}' RETURNING *`);
-    const medHisRes = await sqlClient.query(`UPDATE Medical_History SET guarian_name='${req.body.guardianName}', height=${req.body.height}, weight=${req.body.weight} WHERE id=${patientRes.rows[0]} RETURNING *`);
+    const medHisRes = await sqlClient.query(`UPDATE Medical_History SET guarian_name='${medHistory.guardianName}', height=${medHistory.height}, weight=${medHistory.weight} WHERE id=${patientRes.rows[0]} RETURNING *`);
     formatPatientResponse(res, patientRes.rows[0], medHisRes.rows[0]);
     return;
   } catch (err) {

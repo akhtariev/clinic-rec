@@ -11,7 +11,11 @@ router.route('/patient/:id').put(async (req, res) => {
     const medHisRes = await sqlClient.query(`UPDATE Medical_History SET guardian_name='${medHistory.guardianName}', height=${medHistory.height === '' ? 'NULL' : medHistory.height}, weight=${medHistory.weight === '' ? 'NULL' : medHistory.weight} WHERE id=${patientRes.rows[0].mid} RETURNING *`);
 
     medHistory.allergies.forEach(async a => {
-      await sqlClient.query(`INSERT INTO Allergies (${a.name}, ${medHisRes.rows[0].id}, to_timestamp(${Date.now()} / 1000.0), ${a.comments})`);
+      try {
+        await sqlClient.query(`INSERT INTO Allergies VALUES ('${a.name}', ${medHisRes.rows[0].id}, to_timestamp(${Date.now()} / 1000.0), '${a.comments}')`);
+      } catch (err) {
+        logger.debug(`Failed to update patient with id: ${patientId}`);
+      }
     });
 
     await formatPatientResponse(res, patientRes.rows[0], medHisRes.rows[0]);

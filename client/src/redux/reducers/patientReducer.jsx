@@ -29,7 +29,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         fullName: payload.patientData.full_name,
         profile_picture_url: payload.patientData.profile_picture_url,
         medHistory: payload.medHistData,
-        pallergies: payload.allergies,
+        allergies: payload.allergies,
       };
     case UPDATE_PATIENT:
       return {

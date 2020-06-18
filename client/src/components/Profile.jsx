@@ -62,7 +62,7 @@ export default function Profile() {
 
   const [allergy, setAllergy] = useState({
     name: '',
-    comment: '',
+    comments: '',
   });
 
   const savePatientInfo = () => {
@@ -86,11 +86,11 @@ export default function Profile() {
 
   const addAllergy = (e) => {
     e.preventDefault();
-    if (allergy.name && allergy.comment) {
+    if (allergy.name && allergy.comments) {
       const newAlllergies = info.allergies;
       newAlllergies.push({ ...allergy, new: true });
       setInfo({ ...info, allergies: newAlllergies });
-      setAllergy({ name: '', comment: '' });
+      setAllergy({ name: '', comments: '' });
     }
   };
 
@@ -207,14 +207,14 @@ export default function Profile() {
               <TextField id='allName' value={allergy.name} className={classes.textField} label='Allergy Name' onChange={event => setAllergy({ ...allergy, name: event.target.value })} />
             </ListItem>
             <ListItem key={2} role={undefined} dense>
-              <TextField id='allComment' value={allergy.comment} className={classes.textField} label='Comment' onChange={event => setAllergy({ ...allergy, comment: event.target.value })} />
+              <TextField id='allComment' value={allergy.comments} className={classes.textField} label='Comment' onChange={event => setAllergy({ ...allergy, comments: event.target.value })} />
               <Button variant='outlined' className={classes.btn} onClick={addAllergy}>Add</Button>
             </ListItem>
             {info.allergies.map((a, index) => (
 
               // eslint-disable-next-line react/no-array-index-key
               <ListItem key={`all${index}`} role={undefined} dense>
-                <Typography className={classes.heading} variant='body'>{`Name: ${a.name}, Comment: ${a.comment}`}</Typography>
+                <Typography className={classes.heading} variant='body'>{`Name: ${a.name}, Comment: ${a.comments}`}</Typography>
               </ListItem>
             ))}
           </List>

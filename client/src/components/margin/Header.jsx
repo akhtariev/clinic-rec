@@ -5,10 +5,10 @@ import { Typography, AppBar, Toolbar, Button, IconButton, Menu, MenuItem } from 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from '@material-ui/core/styles';
 import createHistory from 'history/createBrowserHistory';
+import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '../../authentication/react-auth0-spa';
 import colors from '../../constants/colors';
 import { deleteAccount } from '../../redux/actions/userActions';
-import { useSelector, useDispatch } from 'react-redux';
 
 const history = createHistory({ forceRefresh: true });
 

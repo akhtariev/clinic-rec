@@ -1,10 +1,14 @@
 ### Config
-Steps to run a postgres instance:
-- docker-compose up -d --build (for first time) 
-- or docker-compose up -d after first time.
-To attach to the container after is running:
-docker exec -it postgres-1 psql -U postgres
-
+Steps to setup this project: 
+- Clone the project.
+- Install a package manager like yarn: https://classic.yarnpkg.com/en/docs/install/
+- To run server: 
+a) Change directory to server and type yarn install or npm install. 
+b) Once completed: type yarn start to run the server. It will start at port: 5002. 
+- To run client: 
+a) cd to client and type yarn install or npm install 
+b) Once completed: yarn start to run the client. It will start at port: 3000
+c) Open chrome on localhost:3000 and you will see the home page. 
 ### Commits
 - Short informative messages
 - Working on your own branch always

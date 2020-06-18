@@ -39,6 +39,10 @@ const useStyles = makeStyles({
     marginTop: 20,
     color: colors.darkBlue,
   },
+  allergy: {
+    marginTop: 30,
+    marginBottom: 15,
+  },
 });
 
 export default function Profile() {
@@ -53,6 +57,12 @@ export default function Profile() {
     height: '',
     weight: '',
     profilePicUrl: '',
+    allergies: patientState.allergies,
+  });
+
+  const [allergy, setAllergy] = useState({
+    name: '',
+    comments: '',
   });
 
   const savePatientInfo = () => {
@@ -60,12 +70,27 @@ export default function Profile() {
       dispatch,
       patientState.id,
       info.fullName,
-      { guardianName: info.guardianName, height: info.height, weight: info.weight },
+      {
+        guardianName: info.guardianName,
+        height: info.height,
+        weight: info.weight,
+        allergies: info.allergies,
+      },
       info.profilePicUrl,
       getTokenSilently,
     );
     if (patientState.medHistory.id) {
       history.push('/');
+    }
+  };
+
+  const addAllergy = (e) => {
+    e.preventDefault();
+    if (allergy.name && allergy.comments) {
+      const newAlllergies = info.allergies;
+      newAlllergies.push({ ...allergy, new: true });
+      setInfo({ ...info, allergies: newAlllergies });
+      setAllergy({ name: '', comments: '' });
     }
   };
 
@@ -96,27 +121,27 @@ export default function Profile() {
             </ListItem>
             )}
             {patientState.fullName && (
-            <ListItem key={1} role={undefined} dense>
+            <ListItem key={2} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Full Name: ${patientState.fullName}`}</Typography>
             </ListItem>
             )}
             {patientState.profile_picture_url && (
-            <ListItem key={1} role={undefined} dense>
+            <ListItem key={3} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Profile Picture URL: ${patientState.profile_picture_url}`}</Typography>
             </ListItem>
             )}
             {patientState.medHistory.guardian_name && (
-            <ListItem key={1} role={undefined} dense>
+            <ListItem key={4} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Guardian Name: ${patientState.medHistory.guardian_name}`}</Typography>
             </ListItem>
             )}
             {patientState.medHistory.height && (
-            <ListItem key={1} role={undefined} dense>
+            <ListItem key={5} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Height: ${patientState.medHistory.height}`}</Typography>
             </ListItem>
             )}
             {patientState.medHistory.weight && (
-            <ListItem key={1} role={undefined} dense>
+            <ListItem key={6} role={undefined} dense>
               <Typography className={classes.heading} variant='h6'>{`Weight: ${patientState.medHistory.weight}`}</Typography>
             </ListItem>
             )}
@@ -142,21 +167,56 @@ export default function Profile() {
           justifyContent='center'
         >
           <List>
+            <ListItem key={1} role={undefined} dense>
+              <TextField className={classes.textField} label='Full Name' onChange={event => setInfo({ ...info, fullName: event.target.value })} />
+            </ListItem>
             <ListItem key={2} role={undefined} dense>
-              <TextField className={classes.textField} id='standard-basic' label='Full Name' onChange={event => setInfo({ ...info, fullName: event.target.value })} />
+              <TextField className={classes.textField} label='Profile Picture URL' onChange={event => setInfo({ ...info, profilePicUrl: event.target.value })} />
             </ListItem>
             <ListItem key={3} role={undefined} dense>
-              <TextField className={classes.textField} id='standard-basic' label='Profile Picture URL' onChange={event => setInfo({ ...info, profilePicUrl: event.target.value })} />
+              <TextField className={classes.textField} label='Guardian Name' onChange={event => setInfo({ ...info, guardianName: event.target.value })} />
             </ListItem>
+            <ListItem key={4} role={undefined} dense>
+              <TextField className={classes.textField} label='Height' onChange={event => setInfo({ ...info, height: event.target.value })} />
+            </ListItem>
+            <ListItem key={5} role={undefined} dense>
+              <TextField className={classes.textField} label='Weight' onChange={event => setInfo({ ...info, weight: event.target.value })} />
+            </ListItem>
+          </List>
+        </Box>
+
+        <Box
+          className={classes.box}
+          display='flex'
+          width={500}
+          alignItems='center'
+          justifyContent='center'
+        >
+          <Typography className={classes.heading} variant='h5'>Allergies Information</Typography>
+        </Box>
+
+        <Box
+          className={classes.box}
+          display='flex'
+          width={500}
+          alignItems='center'
+          justifyContent='center'
+        >
+          <List>
             <ListItem key={1} role={undefined} dense>
-              <TextField className={classes.textField} id='standard-basic' label='Guardian Name' onChange={event => setInfo({ ...info, guardianName: event.target.value })} />
+              <TextField id='allName' value={allergy.name} className={classes.textField} label='Allergy Name' onChange={event => setAllergy({ ...allergy, name: event.target.value })} />
             </ListItem>
             <ListItem key={2} role={undefined} dense>
-              <TextField className={classes.textField} id='standard-basic' label='Height' onChange={event => setInfo({ ...info, height: event.target.value })} />
+              <TextField id='allComment' value={allergy.comments} className={classes.textField} label='Comment' onChange={event => setAllergy({ ...allergy, comments: event.target.value })} />
+              <Button variant='outlined' className={classes.btn} onClick={addAllergy}>Add</Button>
             </ListItem>
-            <ListItem key={2} role={undefined} dense>
-              <TextField className={classes.textField} id='standard-basic' label='Weight' onChange={event => setInfo({ ...info, weight: event.target.value })} />
-            </ListItem>
+            {info.allergies.map((a, index) => (
+
+              // eslint-disable-next-line react/no-array-index-key
+              <ListItem key={`all${index}`} role={undefined} dense>
+                <Typography className={classes.heading} variant='body'>{`Name: ${a.name}, Comment: ${a.comments}`}</Typography>
+              </ListItem>
+            ))}
           </List>
         </Box>
       </Paper>

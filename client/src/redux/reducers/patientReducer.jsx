@@ -8,6 +8,7 @@ const initialState = {
   profile_picture_url: null,
   medHistory: null,
   triggerUpdate: false,
+  allergies: [],
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
@@ -28,6 +29,7 @@ const userReducer = (state = initialState, { type, payload }) => {
         fullName: payload.patientData.full_name,
         profile_picture_url: payload.patientData.profile_picture_url,
         medHistory: payload.medHistData,
+        allergies: payload.allergies,
       };
     case UPDATE_PATIENT:
       return {

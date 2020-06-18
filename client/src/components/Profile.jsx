@@ -84,7 +84,8 @@ export default function Profile() {
     }
   };
 
-  const addAllergy = () => {
+  const addAllergy = (e) => {
+    e.preventDefault();
     if (allergy.name && allergy.comment) {
       const newAlllergies = info.allergies;
       newAlllergies.push({ ...allergy, new: true });
@@ -203,10 +204,10 @@ export default function Profile() {
         >
           <List>
             <ListItem key={1} role={undefined} dense>
-              <TextField className={classes.textField} label='Allergy Name' onChange={event => setAllergy({ ...allergy, name: event.target.value })} />
+              <TextField id='allName' value={allergy.name} className={classes.textField} label='Allergy Name' onChange={event => setAllergy({ ...allergy, name: event.target.value })} />
             </ListItem>
             <ListItem key={2} role={undefined} dense>
-              <TextField className={classes.textField} label='Comment' onChange={event => setAllergy({ ...allergy, comment: event.target.value })} />
+              <TextField id='allComment' value={allergy.comment} className={classes.textField} label='Comment' onChange={event => setAllergy({ ...allergy, comment: event.target.value })} />
               <Button variant='outlined' className={classes.btn} onClick={addAllergy}>Add</Button>
             </ListItem>
             {info.allergies.map((a, index) => (

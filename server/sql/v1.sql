@@ -123,7 +123,19 @@ INSERT INTO Doctor VALUES
 ('1003', 'eliza.jones@gmail.com', 'elizajones1003','Eliza Jones', 'https://google.com/images/elizajones', 'Dr Jones is one of the most respected Doctors in Vancouver.', '0001'),
 ('1004', 'jonas.brown@gmail.com', 'jonasbrown2020','Jonas Brown', 'https://google.com/images/jonasbrown', 'My name is Jonas and I love cats and playing with my kids during my free time.', '0001'),
 ('1005', 'rohan.m@gmail.com', 'rohanm21', 'Rohan M', 'https://google.com/images/rohanm', 'Been a doctor for 10 years. I love dogs and playing soccer for fun!', '0002'),
-('1006', 'rachit.malik@gmail.com', 'rachitm21','Rachit Malik', 'https://google.com/images/rachitmalik', 'One of my goals in life is to help people through medicine. I hope I can be of service to you..', '0003');
+('1006', 'rachit.malik@gmail.com', 'rachitm21','Rachit Malik', 'https://google.com/images/rachitmalik', 'One of my goals in life is to help people through medicine. I hope I can be of service to you..', '0003'),
+('1007', 'james.s@gmail.com', 'james01','James Smith', 'https://google.com/images/', 'Favorite animal: dog', '0003'),
+('1008', 'john.s@gmail.com', 'john01','John Smith', 'https://google.com/images/', 'Favorite animal: cat', '0003'),
+('1009', 'robert.s@gmail.com', 'robert01','Robert Smith', 'https://google.com/images/', 'Favorite food: pizza', '0003'),
+('1010', 'mary.j@gmail.com', 'mary01','Mary Johnson', 'https://google.com/images/', 'Favorite instrument: guitar', '0003'),
+('1011', 'patricia.j@gmail.com', 'patricia01','Patricia Johnson', 'https://google.com/images/', 'Favorite food: pasta', '0003'),
+('1012', 'jennifer.j@gmail.com', 'jennifer01','Jennifer Johnson', 'https://google.com/images/', 'Favorite instrument: violin', '0003'),
+('1013', 'jim.s@gmail.com', 'jim02','Jim Smith', 'https://google.com/images/', 'Favorite animal: dog', '0005'),
+('1014', 'jake.s@gmail.com', 'jake02','Jake Smith', 'https://google.com/images/', 'Favorite animal: cat', '0005'),
+('1015', 'bob.s@gmail.com', 'bob02','Bob Smith', 'https://google.com/images/', 'Favorite food: pizza', '0005'),
+('1016', 'elizabeth.j@gmail.com', 'elizabeth02','Elizabeth Johnson', 'https://google.com/images/', 'Favorite instrument: guitar', '0005'),
+('1017', 'sara.j@gmail.com', 'sara02','Sara Johnson', 'https://google.com/images/', 'Favorite food: pasta', '0005'),
+('1018', 'lisa.j@gmail.com', 'lisa02','Lisa Johnson', 'https://google.com/images/', 'Favorite instrument: violin', '0005');
 
 
 CREATE TABLE Rating(
@@ -157,6 +169,17 @@ INSERT INTO Specializes VALUES ('Dermatology', '1003', 18);
 INSERT INTO Specializes VALUES ('Gynecology', '1004', 17);
 INSERT INTO Specializes VALUES ('Gynecology', '1005', 20);
 INSERT INTO Specializes VALUES ('Neurology', '1006', 10);
+INSERT INTO Specializes VALUES ('Cardiology', '1007', 16);
+INSERT INTO Specializes VALUES ('Neurology', '1008', 18);
+INSERT INTO Specializes VALUES ('Pediatrics', '1009', 19);
+INSERT INTO Specializes VALUES ('Dermatology', '1010', 18);
+INSERT INTO Specializes VALUES ('Gynecology', '1011', 17);
+INSERT INTO Specializes VALUES ('Neurology', '1013', 18);
+INSERT INTO Specializes VALUES ('Pediatrics', '1014', 19);
+INSERT INTO Specializes VALUES ('Dermatology', '1015', 18);
+INSERT INTO Specializes VALUES ('Gynecology', '1016', 17);
+INSERT INTO Specializes VALUES ('Cardiology', '1017', 18);
+
 
 CREATE TABLE Bill ( 
 bill_id CHAR(36) PRIMARY KEY, 
@@ -168,14 +191,21 @@ paid_date DATE,
 clinic_id CHAR(36) NOT NULL, 
 patient_id CHAR(24)  NOT NULL, 
 FOREIGN KEY(clinic_id) REFERENCES Clinic(id),
-FOREIGN KEY(patient_id) REFERENCES Patient(id)); 
+FOREIGN KEY(patient_id) REFERENCES Patient(id) ON DELETE CASCADE); 
 
 INSERT INTO Bill VALUES
 ('0001', 250, 0, '2019-10-10', '2019-11-1', '2019-10-29', '0001', '0002'),
 ('0002', 300, 0, '2020-01-01', '2020-03-02', '2020-01-02', '0002', '0001'), 
 ('0003', 110, 0, '2019-10-10', '2019-11-1', '2019-10-27', '0003', '0003'), 
 ('0004', 112, 0, '2019-10-10', '2019-11-1', '2019-10-11', '0004', '0005'), 
-('0005', 76, 10, '2020-03-01', '2020-03-05', '2020-03-06', '0005', '0004');
+('0005', 76, 10, '2020-03-01', '2020-03-05', '2020-03-06', '0005', '0004'),
+('0006', 83, 10, '2020-03-01', '2020-03-30', '2020-03-06', '0005', '5eeadaeba2aa690b72ee0d85'),
+('0007', 127, 0, '2020-03-08', '2020-03-30', '2020-03-13', '0001', '5eeadaeba2aa690b72ee0d85'),
+('0008', 222, 0, '2020-01-01', '2020-01-30', '2020-01-06', '0003', '5eeadaeba2aa690b72ee0d85'),
+('0009', 56, 0, '2020-03-01', '2020-03-30', '2020-03-06', '0005', '5eeadaeba2aa690b72ee0d85'),
+('0010', 29, 20, '2019-04-01', '2019-04-30', '2020-04-06', '0002', '5eeadaeba2aa690b72ee0d85'),
+('0011', 48, 0, '2020-03-01', '2020-03-30', '2020-03-06', '0001', '5eeadaeba2aa690b72ee0d85'),
+('0012', 97, 0, '2019-02-01', '2019-02-28', '2020-02-06', '0004', '5eeadaeba2aa690b72ee0d85');
 
 CREATE TABLE Allergies(
     name VARCHAR(30),
